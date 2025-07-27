@@ -1,0 +1,365 @@
+body {
+	font-family: Arial, sans-serif;
+	background: #292524;
+	margin: 0;
+	padding: 20px;
+	/* background-image: url('/static/assets/v-for-vigilence.jpg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center; */
+}
+
+h1 {
+	text-align: center;
+	color: #fff;
+}
+
+#challenges-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 15px;
+	margin-top: 20px;
+}
+
+h1,
+p,
+h2 {
+	color: #ffffff;
+}
+
+a {
+	color: #f3e600;
+	text-decoration: none;
+}
+a:hover {
+	color: #f3e7004b;
+	text-decoration: underline;
+}
+a:visited {
+	color: #6a009b;
+}
+
+/* 📝 Markdown Styling */
+.readme {
+	background: #1e1e1e;
+	color: #f8f8f2;
+	padding: 15px 0px;
+	border-radius: 6px;
+	margin-top: 10px;
+	overflow-x: auto;
+	font-family: system-ui, -apple-system, sans-serif;
+	line-height: 1.6;
+	white-space: normal;
+	word-wrap: break-word;
+}
+
+.readme h1,
+.readme h2,
+.readme h3 {
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+	color: #eaeaea;
+}
+
+.readme p {
+	margin: 0.5em 0;
+}
+
+.readme code {
+	background: #eaeaea;
+	color: #272822;
+	padding: 2px 4px;
+	border-radius: 4px;
+	font-family: monospace;
+}
+
+.readme pre {
+	background: #272822;
+	color: #f8f8f2;
+	padding: 10px;
+	border-radius: 5px;
+	overflow-x: auto;
+}
+.readme ul {
+	margin: 10px 0;
+	padding-left: 20px;
+}
+.readme strong {
+	font-weight: bold;
+}
+
+#flagInput {
+	width: 300px;
+	padding: 5px;
+}
+#flagStatus {
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 15px;
+	margin-top: 20px;
+}
+.challenge-card {
+	background: transparent;
+	border: 2px solid #ccc;
+	color: #f3e600;
+	padding: 15px;
+	border-radius: 8px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	position: relative;
+	text-align: center;
+	transition: transform 0.2s ease;
+	backdrop-filter: blur(3px);
+}
+.challenge-card:hover {
+	transform: scale(1.03);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.challenge-card.completed {
+	background-color: transparent;
+	border: 2px solid #4CAF50;
+	/* subtle green border */
+	backdrop-filter: blur(3px);
+	box-shadow: none;
+}
+
+/* Remove green background and giant emoji */
+.challenge-card.completed::after {
+	content: none;
+}
+
+/* Final styling for the completed label */
+.challenge-status {
+	font-weight: bold;
+	color: #4CAF50;
+	font-size: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.4em;
+	margin-top: 10px;
+}
+.progress {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.view-btn {
+	margin: 8px;
+	padding: 10px 16px;
+	border: none;
+	border-radius: 6px;
+	background: #1e1e1e;
+	color: #fff;
+	font-size: 1em;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+.view-btn:hover {
+	background: linear-gradient(135deg, #6a009b, #48006a);
+}
+
+.actions {
+	margin: 15px 0;
+}
+.actions button {
+	margin-right: 10px;
+	height: 3em;
+	border: none;
+	border-radius: 15px;
+	color: rgb(0, 0, 0);
+	cursor: pointer;
+	background-color: #ffffff;
+	font-weight: 500;
+}
+
+/* 🎯 Bottom Buttons Styling */
+.actions.bottom-buttons {
+  margin-top: 30px;
+}
+
+.actions.bottom-buttons button {
+  font-size: 0.9em;
+  height: 2.5em;
+  padding: 0 12px;
+}
+
+/* Challenge Page Body */
+
+#challenge-wrapper {
+	background: #1e1e1e;
+	color: #f8f8f2;
+	padding: 20px;
+	border-radius: 6px;
+	margin-top: 20px;
+	overflow-x: auto;
+	font-family: system-ui, -apple-system, sans-serif;
+	line-height: 1.6;
+	white-space: normal;
+	word-wrap: break-word;
+	min-width: 24em;
+	max-width: 80em;
+
+	margin-left: auto;
+	margin-right: auto;
+
+	display: flex;
+	flex-direction: column;
+}
+
+/* #challenge-wrapper-section {
+	margin-bottom: 20px;
+	width: 100%;
+} */
+
+.challenge-wrapper-footer {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.challenge-wrapper-footer > * {
+	margin: 0;
+}
+
+/* .challenge-wrapper-footer button {
+	margin-top: 10px;
+	padding: 10px 20px;
+	border: 1px solid #ffffff;
+	border-radius: 6px;
+	background: #1e1e1e;
+	color: #ffffff;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+.challenge-wrapper-footer button:hover {
+	background: linear-gradient(135deg, #6a009b, #48006a);
+	color: #f3e600;
+	transform: scale(1.03);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+} */
+
+
+
+/* From Uiverse.io by vinodjangid07 */ 
+.input-wrapper {
+  width: fit-content;
+  height: 45px;
+  border-radius: 20px;
+  padding: 5px;
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  background-color: #292524;
+}
+
+.icon {
+  width: 30px;
+  fill: rgb(255, 255, 255);
+  margin-left: 8px;
+  transition: all 0.3s;
+}
+.input {
+  max-width: 225px;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding-left: 15px;
+  background-color: #292524;
+  color: #50ff16ff;
+  font-size: 1em;
+}
+.input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #292524 inset;
+  -webkit-text-fill-color: #ffffff;
+}
+.Subscribe-btn {
+  height: 100%;
+  width: 95px;
+  border: none;
+  border-radius: 15px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  background-color: #ffffff;
+  font-weight: 500;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s;
+}
+.arrow {
+  /* display: none; */
+  position: absolute;
+  margin-right: 150px;
+  transition: all 0.3s;
+}
+.input-wrapper:active .icon {
+  transform: scale(1.3);
+}
+.Subscribe-btn:hover {
+  color: white;
+}
+.Subscribe-btn:hover .arrow {
+  margin-right: 0;
+  animation: jello-vertical 0.9s both;
+  transform-origin: right;
+}
+
+@keyframes jello-vertical {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+.Subscribe-btn:active {
+  transform: scale(0.9);
+}
+/* 🆕 Top Right Button for "Back to Hub" (matches view-btn) */
+.top-right {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.home-btn {
+  margin: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #1e1e1e;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.home-btn:hover {
+  background: linear-gradient(135deg, #6a009b, #48006a);
+}
+

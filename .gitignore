@@ -35,8 +35,8 @@ dryrun_output
 dryrun_output/**
 
 # Ignore generated web_version
-web_version
-web_version/**
+!web_version
+!web_version/**
 
 # Un-ignore challenges and web_version_admin
 !challenges/
