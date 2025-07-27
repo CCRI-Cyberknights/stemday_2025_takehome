@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Date: Sun, 30 Jun 2025 15:53:17 GMT
+Server: Go HTTP Server/1.19
+Content-Type: application/json
+Cache-Control: no-store
+X-Powered-By: Python/3.11.4
+X-Flag: CCRI-FDDG-1103
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Set-Cookie: sessionid=y9leerklmh47; HttpOnly; Secure
+
+Welcome to the Liber8 data endpoint.
+This endpoint returns plain text responses.
+
+<!-- Debug: API response size 512 bytes -->

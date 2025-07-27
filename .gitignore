@@ -1,0 +1,51 @@
+# Ignore everything
+*
+
+# Un-ignore these files and folders
+!.gitignore
+!README.md
+!CONTRIBUTING.md
+!LICENSE
+!.ccri_ctf_root
+!.mode
+
+# Setup scripts
+!setup_home_version.py
+!start_web_hub.py
+!stop_web_hub.py
+
+# Admin tools
+!generate_all_flags.py
+!validate_all_flags.py
+!copy_ccri_ctf.py
+
+# Desktop shortcuts
+!Launch_CCRI_CTF_Hub.desktop
+
+# Un-ignore folders AND their contents
+!flag_generators/
+!flag_generators/**
+
+# Ignore Python cache only in flag_generators
+flag_generators/__pycache__/
+flag_generators/**/__pycache__/
+
+# Ignore dry run output
+dryrun_output
+dryrun_output/**
+
+# Ignore generated web_version
+web_version
+web_version/**
+
+# Un-ignore challenges and web_version_admin
+!challenges/
+!challenges/**
+
+!challenges_solo
+!challenges_solo/**
+
+!web_version_admin/
+!web_version_admin/**
+web_version_admin/server.bak
+web_version_admin/challenges.json.bak
