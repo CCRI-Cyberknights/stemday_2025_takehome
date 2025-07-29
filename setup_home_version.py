@@ -65,7 +65,7 @@ def main():
         "gcc", "build-essential", "unzip", "lsof", "xdg-utils",
         "nmap", "tshark", "hashcat", "qrencode",
         "zbar-tools", "exiftool", "vim-common", "util-linux",
-        "python3-markdown", "python3-scapy"
+        "python3-markdown", "python3-scapy", "fonts-noto-color-emoji"
     ]
     apt_install(apt_packages)
 
