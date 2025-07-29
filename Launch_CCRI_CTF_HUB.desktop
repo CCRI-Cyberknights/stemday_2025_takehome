@@ -4,6 +4,6 @@ Type=Application
 Terminal=false
 Name=Launch_CCRI_CTF_Hub
 Exec=bash -c "python3 start_web_hub.py"
-Path=/home/ccri_admin/Desktop/stemday_2025_takehome
+Path=/home/ccri_admin/Desktop/stemday_2025
 Icon=firefox-esr
 Name[en_US]=Launch_CCRI_CTF_Hub

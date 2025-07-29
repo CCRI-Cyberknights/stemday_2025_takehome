@@ -63,7 +63,7 @@ def main():
     apt_packages = [
         "git", "python3", "python3-pip", "python3-venv",
         "gcc", "build-essential", "unzip", "lsof", "xdg-utils",
-        "nmap", "tshark", "hashcat", "qrencode",
+        "nmap", "tshark", "hashcat", "qrencode", "libmcrypt4",
         "zbar-tools", "exiftool", "vim-common", "util-linux",
         "python3-markdown", "python3-scapy", "fonts-noto-color-emoji"
     ]
