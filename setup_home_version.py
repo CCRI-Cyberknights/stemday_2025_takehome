@@ -51,6 +51,11 @@ Pin-Priority: 1001
         f.write(pin_contents)
     run(["sudo", "mv", "/tmp/steghide-pin", pin_file])
 
+def install_zsteg():
+    print("💎 Installing Ruby + zsteg (for image forensics)...")
+    run("sudo apt install -y ruby ruby-dev libmagic-dev")
+    run("sudo gem install zsteg")
+
 def clone_repo():
     print("🔁 Cloning the take-home CTF repository...")
     run("git clone https://github.com/CCRI-Cyberknights/stemday2025_takehome.git")
@@ -59,24 +64,32 @@ def main():
     print("\n🚀 Setting up your CCRI STEM Day Take-Home environment...")
     print("=" * 60 + "\n")
 
-    # === Install system dependencies ===
     apt_packages = [
+        # Core & Python
         "git", "python3", "python3-pip", "python3-venv",
-        "gcc", "build-essential", "unzip", "lsof", "xdg-utils",
-        "nmap", "tshark", "hashcat", "qrencode", "libmcrypt4",
-        "zbar-tools", "exiftool", "vim-common", "util-linux",
-        "python3-markdown", "python3-scapy", "fonts-noto-color-emoji"
+        "gcc", "build-essential", "python3-markdown", "python3-scapy",
+
+        # Challenge Tools
+        "unzip", "lsof", "xdg-utils", "nmap", "tshark", "hashcat",
+        "qrencode", "libmcrypt4", "zbar-tools", "exiftool", "vim-common",
+        "util-linux", "fonts-noto-color-emoji",
+
+        # 🔍 Additions from challenge requirements
+        "binwalk", "fcrackzip", "john", "radare2", "hexedit", "feh", "imagemagick"
     ]
     apt_install(apt_packages)
 
-    # === Install patched Steghide ===
+    # 🕵️ Steghide patched version
     install_steghide_deb()
 
-    # === Install Python libraries ===
+    # 💎 zsteg support
+    install_zsteg()
+
+    # 🐍 Python dependencies
     pip_packages = ["flask", "markupsafe"]
     pip_install(pip_packages)
 
-    # === Clone the take-home repo ===
+    # ⬇️ Clone student repo
     clone_repo()
 
     print("\n🎉 Setup complete! You can now launch the CTF from:")
