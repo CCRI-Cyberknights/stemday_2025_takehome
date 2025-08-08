@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Date: Sun, 30 Jun 2025 15:58:49 GMT
+Server: Apache/2.4.54 (Ubuntu)
+Content-Type: text/plain; charset=UTF-8
+Cache-Control: public, max-age=86400
+X-Powered-By: Python/3.11.4
+X-Flag: QUIZ-RVSZ-6800
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+
+<html>
+  <head><title>Liber8 Portal</title></head>
+  <body>
+    <h1>Welcome to Liber8</h1>
+    <p>System maintenance is underway. Some services may be unavailable.</p>
+  </body>
+</html>
+
+<!-- Debug: API response size 512 bytes -->

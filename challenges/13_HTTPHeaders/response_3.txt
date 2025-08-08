@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Date: Sun, 30 Jun 2025 15:55:07 GMT
+Server: nginx/1.24.0
+Content-Type: application/json
+Cache-Control: public, max-age=86400
+X-Powered-By: Ruby on Rails/7.1.0
+X-Flag: LJYQ-6641-OLYB
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+
+<html>
+  <head><title>Liber8 Portal</title></head>
+  <body>
+    <h1>Welcome to Liber8</h1>
+    <p>System maintenance is underway. Some services may be unavailable.</p>
+  </body>
+</html>
+
+<!-- Debug: Session created for client 10.6.112.3 -->

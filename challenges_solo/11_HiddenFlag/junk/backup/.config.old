@@ -1,0 +1,7 @@
+user=guest
+# Legacy configuration file
+# [No sensitive data found here]
+user=guest
+user=guest
+# Legacy configuration file
+enable_logging=true

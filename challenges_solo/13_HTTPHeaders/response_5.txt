@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+Date: Sun, 30 Jun 2025 15:48:07 GMT
+Server: Liber8-Server/3.0.0-beta
+Content-Type: application/json
+Cache-Control: public, max-age=86400
+X-Powered-By: Python/3.11.4
+X-Flag: TXCN-AEXY-0377
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+
+{
+  "status": "ok",
+  "message": "API version 1.2.4 is running.",
+  "notes": "No maintenance scheduled."
+}
+
+<!-- To-do: Update security headers on staging -->

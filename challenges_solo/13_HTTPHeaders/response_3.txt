@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Date: Sun, 30 Jun 2025 15:54:41 GMT
+Server: nginx/1.24.0
+Content-Type: application/json
+Cache-Control: public, max-age=86400
+X-Powered-By: Node.js/18.16.0
+X-Flag: QVVU-VUIQ-6768
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+
+Welcome to the Liber8 data endpoint.
+This endpoint returns plain text responses.
+
+<!-- Developer note: Remove X-Test headers before release -->

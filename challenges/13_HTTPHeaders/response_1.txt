@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Date: Sun, 30 Jun 2025 15:55:45 GMT
+Server: Liber8-Server/2.3.1
+Content-Type: text/html; charset=UTF-8
+Cache-Control: public, max-age=86400
+X-Powered-By: Ruby on Rails/7.1.0
+X-Flag: ABIQ-PIJO-6837
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+
+<html>
+  <head><title>Liber8 Portal</title></head>
+  <body>
+    <h1>Welcome to Liber8</h1>
+    <p>System maintenance is underway. Some services may be unavailable.</p>
+  </body>
+</html>
+
+<!-- Debug: Temporary caching enabled -->
