@@ -78,8 +78,4 @@ Switch between modes from the hub’s top navigation.
 
 ---
 
-## ❓ Need Help?
-
-Ask a CCRI CyberKnights club member or explore the files to learn by doing.
-
 Have fun and good luck! 🎉
