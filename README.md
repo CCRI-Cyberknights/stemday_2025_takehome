@@ -10,7 +10,7 @@ This is the same environment you experienced during STEM Day, now ready for you 
 Run this in a terminal on **Parrot OS** or any Debian/Ubuntu system:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025/main/setup_home_version.py | python3 -
+curl -fsSL https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py | python3 -
 ````
 
 This will:
