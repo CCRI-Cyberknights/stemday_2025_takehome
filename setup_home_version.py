@@ -6,8 +6,11 @@ import subprocess
 # === 🛠 CCRI STEM Day CTF Take-Home Setup Script ===
 
 STEGO_DEB_URL = "https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025/main/debs/steghide_0.6.0-1_amd64.deb"
+REPO_URL = "https://github.com/CCRI-Cyberknights/stemday2025_takehome.git"
+REPO_DIR = os.path.expanduser("~/stemday2025_takehome")
 
 def run(cmd, check=True):
+    """Run a shell command and show output."""
     print(f"💻 Running: {cmd}")
     result = subprocess.run(cmd, shell=True)
     if check and result.returncode != 0:
@@ -16,7 +19,7 @@ def run(cmd, check=True):
 
 def apt_install(packages):
     print("📦 Installing system dependencies...")
-    run("sudo apt update")
+    run("sudo apt update -y")
     run(f"sudo apt install -y {' '.join(packages)}")
 
 def pip_install(packages):
@@ -35,21 +38,20 @@ def install_steghide_deb():
         print("ℹ️ Steghide not found or outdated. Installing patched version...")
 
     print("⬇️ Downloading Steghide 0.6.0 .deb package...")
-    run(["wget", "-q", STEGO_DEB_URL, "-O", "/tmp/steghide.deb"])
+    run(f"wget -q {STEGO_DEB_URL} -O /tmp/steghide.deb")
 
     print("📦 Installing patched Steghide...")
     run("sudo dpkg -i /tmp/steghide.deb || sudo apt --fix-broken install -y")
     run("rm /tmp/steghide.deb")
 
     print("📌 Pinning Steghide 0.6.0 to prevent downgrade...")
-    pin_file = "/etc/apt/preferences.d/steghide"
     pin_contents = """Package: steghide
 Pin: version 0.6.0*
 Pin-Priority: 1001
 """
     with open("/tmp/steghide-pin", "w") as f:
         f.write(pin_contents)
-    run(["sudo", "mv", "/tmp/steghide-pin", pin_file])
+    run("sudo mv /tmp/steghide-pin /etc/apt/preferences.d/steghide")
 
 def install_zsteg():
     print("💎 Installing Ruby + zsteg (for image forensics)...")
@@ -57,8 +59,11 @@ def install_zsteg():
     run("sudo gem install zsteg")
 
 def clone_repo():
-    print("🔁 Cloning the take-home CTF repository...")
-    run("git clone https://github.com/CCRI-Cyberknights/stemday2025_takehome.git")
+    if os.path.exists(REPO_DIR):
+        print(f"ℹ️ Repository already exists at {REPO_DIR}")
+        return
+    print(f"🔁 Cloning the take-home CTF repository into {REPO_DIR} ...")
+    run(f"git clone {REPO_URL} {REPO_DIR}")
 
 def main():
     print("\n🚀 Setting up your CCRI STEM Day Take-Home environment...")
@@ -74,26 +79,22 @@ def main():
         "qrencode", "libmcrypt4", "zbar-tools", "exiftool", "vim-common",
         "util-linux", "fonts-noto-color-emoji",
 
-        # 🔍 Additions from challenge requirements
+        # From challenge requirements
         "binwalk", "fcrackzip", "john", "radare2", "hexedit", "feh", "imagemagick"
     ]
     apt_install(apt_packages)
-
-    # 🕵️ Steghide patched version
     install_steghide_deb()
-
-    # 💎 zsteg support
     install_zsteg()
 
-    # 🐍 Python dependencies
     pip_packages = ["flask", "markupsafe"]
     pip_install(pip_packages)
 
-    # ⬇️ Clone student repo
     clone_repo()
 
-    print("\n🎉 Setup complete! You can now launch the CTF from:")
-    print("   ~/stemday2025_takehome/start_web_hub.py")
+    print("\n🎉 Setup complete!")
+    print(f"📂 Your CTF folder is here: {REPO_DIR}")
+    print("▶️ To start the CTF hub:")
+    print(f"   cd {REPO_DIR} && python3 start_web_hub.py")
 
 if __name__ == "__main__":
     if os.geteuid() != 0:

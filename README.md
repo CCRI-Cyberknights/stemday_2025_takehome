@@ -1,78 +1,43 @@
 # 🎯 CCRI STEM Day CTF – Take-Home Version
 
 Welcome to the **CCRI CyberKnights Capture The Flag Challenge!** 🧠💻  
-This folder contains the full CTF environment we handed out during STEM Day. It works offline, directly from your VM or installed Parrot OS system.
+This is the same environment you experienced during STEM Day, now ready for you to explore at home!
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quick Setup (One Step)
 
-### ▶️ Step 1: Launch the Challenge Hub
-
-Double-click the **`Launch_CCRI_CTF_HUB.desktop`** icon on your desktop.  
-If it doesn't open right away:
-
-1. Right-click the file → **Properties**
-2. Go to the **Permissions** tab
-3. ✅ Check “Allow this file to run as a program”
-
-This will launch the CTF hub in your browser where you can pick a challenge.
-
----
-
-### 🧭 Guided vs Solo Mode
-
-You can choose between two ways to play:
-
-- **Guided Mode** – beginner-friendly, includes interactive hints and scripts to walk you through each step
-- **Solo Mode** – same challenges, but no helper scripts or guidance — just you and your skills!
-
-You can switch between these in the top navigation of the CTF hub.
-
----
-
-## 🧩 Solving Challenges
-
-Each challenge will ask you to find a **flag** — a string that looks like this:
-
-```
-CTF{example_flag_here}
-```
-
-Once you think you’ve found it, enter it into the challenge’s text box and click **Submit**.
-
-- ✅ Correct: The challenge button will show a green checkmark
-- ❌ Incorrect: You’ll be told it’s wrong so you can try again
-
-Some flags might require you to:
-- Decode text
-- Crack a password
-- Analyze a file
-- Scan a fake network
-
-Each challenge is different!
-
----
-
-## 🧠 Tips for Success
-
-- Use the **Guided Mode** if you're new — it’s designed to teach you.
-- If something doesn’t seem to work, try reading the challenge folder’s `README.txt` or run its `.sh` script.
-- The challenges are meant to be tricky — don’t be afraid to experiment!
-
----
-
-## 💡 Want to Run the Hub Manually?
-
-If you ever want to launch the challenge hub yourself from the terminal:
+Run this in a terminal on **Parrot OS** or any Debian/Ubuntu system:
 
 ```bash
-cd ~/Desktop/stemday_2025_takehome
-python3 start_web_hub.py
-```
+curl -fsSL https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025/main/setup_home_version.py | python3 -
+````
 
-Then open your browser and go to:  
-[http://localhost:5000](http://localhost:5000)
+This will:
+
+* Install all required tools and dependencies
+* Download and install the patched Steghide version
+* Install `zsteg` for image forensics
+* Clone the **take-home CTF repository** to your home folder (`~/stemday2025_takehome`)
+
+---
+
+## ▶️ Launching the Challenge Hub
+
+After setup:
+
+1. Go to your desktop and double-click **`Launch_CCRI_CTF_HUB.desktop`**
+
+   * If it doesn’t open, right-click → **Properties → Permissions** → enable **“Allow this file to run as a program”**
+
+2. Or run manually in a terminal:
+
+   ```bash
+   cd ~/stemday2025_takehome
+   python3 start_web_hub.py
+   ```
+
+   Then open [http://localhost:5000](http://localhost:5000) in your browser.
 
 To stop it:
 
@@ -82,15 +47,39 @@ python3 stop_web_hub.py
 
 ---
 
-## ❓ Need Help?
+## 🧭 Guided vs Solo Modes
 
-Ask your instructor or a CCRI CyberKnights club member — we’d be happy to help.
+* **Guided Mode** – Interactive hints and scripts to help solve each challenge
+* **Solo Mode** – Same challenges, minimal hints for independent play
 
-Or feel free to explore the folders and learn by tinkering!
+Switch between modes from the hub’s top navigation.
 
 ---
 
-## 🧡 Good Luck and Have Fun!
+## 🧩 How to Play
 
-We hope you enjoy solving these puzzles and exploring the world of cybersecurity.  
-— The **CCRI CyberKnights**
+* Each challenge has a **flag** like:
+
+  ```
+  CTF{example_flag_here}
+  ```
+* Enter the flag and click **Submit**:
+
+  * ✅ Correct: green checkmark appears
+  * ❌ Incorrect: try again
+
+---
+
+## 🧠 Tips
+
+* Start in **Guided Mode** if you’re new
+* Read the `README.txt` in each challenge folder for clues
+* Try different tools — each challenge teaches something new
+
+---
+
+## ❓ Need Help?
+
+Ask a CCRI CyberKnights club member or explore the files to learn by doing.
+
+Have fun and good luck! 🎉
