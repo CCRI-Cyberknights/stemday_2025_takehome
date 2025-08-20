@@ -5,9 +5,14 @@ This is the same environment you experienced during STEM Day, now ready for you 
 
 ---
 
-## 🚀 Quick Setup (One Step)
+## 🚀 Quick Setup (Two Steps)
 
-Run this in a terminal on **Parrot OS** or any Debian/Ubuntu system:
+Download **Parrot OS** from here, either *Home* for the look or *Security* for the full suite of tools:  
+👉 https://www.parrotsec.org/download/
+
+⚠️ Other Linux distros (like Mint or Ubuntu) may work, but Parrot OS is the tested environment.
+
+In a terminal on **Parrot OS**, run:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py | python3 -
@@ -18,7 +23,11 @@ This will:
 * Install all required tools and dependencies
 * Download and install the patched Steghide version
 * Install `zsteg` for image forensics
-* Clone the **take-home CTF repository** to your home folder (`~/stemday2025_takehome`)
+* Clone the **take-home CTF repository** to your Desktop at:
+
+  ```
+  ~/Desktop/stemday_2025_takehome
+  ```
 
 ---
 
@@ -26,20 +35,25 @@ This will:
 
 After setup:
 
-1. Go to your desktop and double-click **`Launch_CCRI_CTF_HUB.desktop`**
+1. Open the folder `~/Desktop/stemday_2025_takehome`
+2. **Move the file `Launch_CCRI_CTF_HUB.desktop` out of the folder and onto your Desktop**
 
-   * If it doesn’t open, right-click → **Properties → Permissions** → enable **“Allow this file to run as a program”**
+   * This is your shortcut to the challenge hub
+3. Double-click **`Launch_CCRI_CTF_HUB.desktop`**
 
-2. Or run manually in a terminal:
+   * If it doesn’t open, right-click → **Properties → Permissions** → enable
+     **“Allow this file to run as a program”**
 
-   ```bash
-   cd ~/stemday2025_takehome
-   python3 start_web_hub.py
-   ```
+### Manual launch (alternative)
 
-   Then open [http://localhost:5000](http://localhost:5000) in your browser.
+```bash
+cd ~/Desktop/stemday_2025_takehome
+python3 start_web_hub.py
+```
 
-To stop it:
+Then open [http://localhost:5000](http://localhost:5000) in your browser.
+
+To stop the hub:
 
 ```bash
 python3 stop_web_hub.py
@@ -63,6 +77,7 @@ Switch between modes from the hub’s top navigation.
   ```
   CTF{example_flag_here}
   ```
+
 * Enter the flag and click **Submit**:
 
   * ✅ Correct: green checkmark appears
