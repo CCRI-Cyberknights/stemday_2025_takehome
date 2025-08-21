@@ -10,7 +10,7 @@ This is the same environment you experienced during STEM Day, now ready for you 
 Download **Parrot OS** from here, either *Home* for the look or *Security* for the full suite of tools:  
 👉 https://www.parrotsec.org/download/
 
-⚠️ Other Linux distros (like Mint or Ubuntu) may work, but Parrot OS is the tested environment.
+⚠️ Other Linux distros (like Linux Mint) should work, but Parrot OS is the tested environment. The desktop icon may only work in Parrot OS right now.
 
 In a terminal on **Parrot OS**, run:
 
