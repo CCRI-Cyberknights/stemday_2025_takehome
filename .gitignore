@@ -8,6 +8,7 @@
 !LICENSE
 !.ccri_ctf_root
 !.mode
+!ccri_ctf.pyz
 
 # Setup scripts
 !setup_home_version.py

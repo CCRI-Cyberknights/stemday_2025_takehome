@@ -4,5 +4,5 @@ Type=Application
 Terminal=true
 Name=Launch_CCRI_CTF_Hub
 Exec=bash -c 'cd "$HOME/Desktop/stemday_2025_takehome" && python3 start_web_hub.py'
-Icon=firefox-esr
+Icon=firefox
 Name[en_US]=Launch_CCRI_CTF_Hub
