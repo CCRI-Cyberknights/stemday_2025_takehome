@@ -9,6 +9,7 @@
 !.ccri_ctf_root
 !.mode
 !ccri_ctf.pyz
+!VMSETUP.md
 
 # Setup scripts
 !setup_home_version.py
