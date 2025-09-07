@@ -12,7 +12,7 @@ Download **Parrot OS** from here, either *Home* for the look or *Security* for t
 
 ⚠️ Other Linux distros (like Linux Mint) should work, but Parrot OS is the tested environment. The desktop icon may only work in Parrot OS right now.
 
-Follow the instructions here [https://github.com/CCRI-Cyberknights/stemday_2025_takehome/blob/main/VMSETUP.md](VMSETUP.md) to setup the **Parrot OS** iso within **Virtualbox**.
+Follow the instructions here [VMSETUP.md](https://github.com/CCRI-Cyberknights/stemday_2025_takehome/blob/main/VMSETUP.md) to setup the **Parrot OS** iso within **Virtualbox**.
 
 In a terminal on **Parrot OS**, run:
 
