@@ -32,6 +32,9 @@ def run(cmd, check=True, env=None):
     return rc
 
 def apt_update():
+    # Fix CD-ROM repository issue on Linux Mint/Ubuntu systems
+    print("🔧 Removing CD-ROM repository entries to prevent apt update issues...")
+    run("sudo sed -i '/cdrom:/d' /etc/apt/sources.list", check=False)
     run(["sudo", "-E", "apt-get", "update", "-y"])
 
 def apt_install(packages):
