@@ -4,8 +4,10 @@ import sys
 import subprocess
 import shlex
 import argparse
+import shutil
+import stat
 
-# === 🛠 CCRI STEM Day CTF Take-Home Setup Script (Non-Interactive; Parrot-aware) ===
+# === 🛠 CCRI STEM Day CTF Take-Home Setup Script (Parrot-aware; Live-CD aware) ===
 
 STEGO_DEB_URL = "https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025/main/debs/steghide_0.6.0-1_amd64.deb"
 REPO_URL = "https://github.com/CCRI-Cyberknights/stemday2025_takehome.git"
@@ -18,12 +20,49 @@ APT_ENV = {
     "UCF_FORCE_CONFOLD": "1",
 }
 
+# -----------------------------
+# Live-CD / privilege helpers
+# -----------------------------
+def is_root() -> bool:
+    try:
+        return os.geteuid() == 0
+    except AttributeError:
+        # Non-POSIX fallback
+        return False
+
+def is_live() -> bool:
+    # Parrot/Debian live indicators
+    try:
+        if os.path.exists("/lib/live/mount/medium") or os.path.exists("/run/live/medium"):
+            return True
+        with open("/proc/cmdline", "r") as f:
+            s = f.read()
+        return "boot=live" in s
+    except Exception:
+        return False
+
+def need_sudo_prefix() -> bool:
+    # In a live session we avoid sudo entirely and expect root
+    if is_live():
+        return False
+    return not is_root()
+
+def sudo_prefix_list():
+    if need_sudo_prefix():
+        if shutil.which("sudo") is None:
+            sys.exit("This script needs root privileges. Re-run as: sudo -E python3 script.py")
+        return ["sudo", "-E"]
+    return []
+
 def run(cmd, check=True, env=None):
-    """Run a shell command and show output, with non-interactive env by default."""
+    """Run a command list or string; auto-add sudo for lists when appropriate."""
     if isinstance(cmd, str):
-        print(f"💻 Running: {cmd}")
+        # For shell pipelines, prefer run_shell() instead so we can sudo-wrap cleanly.
+        print(f"💻 Running (shell): {cmd}")
         rc = subprocess.run(cmd, shell=True, env=env or APT_ENV).returncode
     else:
+        if len(cmd) > 0 and cmd[0] not in ("sudo", "pkexec") and need_sudo_prefix():
+            cmd = sudo_prefix_list() + list(cmd)
         print(f"💻 Running: {' '.join(shlex.quote(c) for c in cmd)}")
         rc = subprocess.run(cmd, env=env or APT_ENV).returncode
     if check and rc != 0:
@@ -31,14 +70,29 @@ def run(cmd, check=True, env=None):
         sys.exit(1)
     return rc
 
+def run_shell(cmd_str: str, check=True, env=None):
+    """Run a bash -lc '...' with sudo only when appropriate; good for pipelines/heredocs."""
+    base = ["bash", "-lc", cmd_str]
+    if need_sudo_prefix():
+        base = sudo_prefix_list() + base
+    print(f"💻 Running (bash -lc): {cmd_str}")
+    rc = subprocess.run(base, env=env or APT_ENV).returncode
+    if check and rc != 0:
+        print(f"❌ ERROR: Command failed -> {cmd_str}", file=sys.stderr)
+        sys.exit(1)
+    return rc
+
+# -----------------------------
+# apt/pip helpers
+# -----------------------------
 def apt_update():
-    run(["sudo", "-E", "apt-get", "update", "-y"])
+    run(["apt-get", "update", "-y"])
 
 def apt_install(packages):
     print("📦 Installing system dependencies (non-interactive)...")
     apt_update()
     base = [
-        "sudo", "-E", "apt-get", "install", "-yq",
+        "apt-get", "install", "-yq",
         "-o", "Dpkg::Options::=--force-confdef",
         "-o", "Dpkg::Options::=--force-confold",
     ]
@@ -48,17 +102,6 @@ def pip_install(packages):
     print("🐍 Installing Python packages...")
     run(["python3", "-m", "pip", "install", "--upgrade", "pip", "--break-system-packages"])
     run(["python3", "-m", "pip", "install", "--break-system-packages"] + packages)
-
-def preseed_wireshark_and_install():
-    """Preseed dumpcap setuid, install wireshark-common + tshark, reconfigure silently, add group."""
-    print("🧪 Preseeding Wireshark (allow non-root capture) and installing non-interactively...")
-    run("echo 'wireshark-common wireshark-common/install-setuid boolean true' | sudo debconf-set-selections")
-    apt_install(["wireshark-common", "tshark"])
-    run(["sudo", "dpkg-reconfigure", "-f", "noninteractive", "wireshark-common"])
-    # Add invoking user to wireshark group (requires logout/login to take effect)
-    target_user = os.environ.get("SUDO_USER") or os.environ.get("USER") or ""
-    if target_user:
-        run(["sudo", "usermod", "-aG", "wireshark", target_user])
 
 # -----------------------------
 # OS detection / arch helpers
@@ -90,6 +133,75 @@ def dpkg_arch():
         return None
 
 # -----------------------------
+# Wireshark / dumpcap (caps → setuid → /usr/local copy)
+# -----------------------------
+def ensure_group(name):
+    if run(["getent", "group", name], check=False) != 0:
+        run(["groupadd", "--system", name], check=False)
+
+def add_users_to_group(group, users):
+    for u in users:
+        if not u:
+            continue
+        if run(["id", u], check=False) == 0:
+            run(["usermod", "-aG", group, u], check=False)
+
+def is_setuid(path):
+    try:
+        st = os.stat(path)
+        return bool(st.st_mode & stat.S_ISUID)
+    except FileNotFoundError:
+        return False
+
+def getcap(path):
+    try:
+        return subprocess.check_output(["getcap", path], text=True).strip()
+    except Exception:
+        return ""
+
+def ensure_dumpcap_nonroot():
+    dumpcap = shutil.which("dumpcap")
+    if not dumpcap:
+        print("ℹ️ dumpcap not found; skipping perms setup.")
+        return
+
+    # Prefer capabilities
+    run(["setcap", "cap_net_raw,cap_net_admin+eip", dumpcap], check=False)
+    caps = getcap(dumpcap)
+    if "cap_net_admin,cap_net_raw" in caps and "eip" in caps:
+        print(f"✅ dumpcap caps OK: {caps}")
+        return
+
+    # Maintainer setuid path
+    run_shell("echo 'wireshark-common wireshark-common/install-setuid boolean true' | debconf-set-selections", check=False)
+    run(["dpkg-reconfigure", "-f", "noninteractive", "wireshark-common"], check=False)
+    if is_setuid(dumpcap):
+        print(f"✅ dumpcap setuid OK: {dumpcap}")
+        return
+
+    # Final fallback: local copy in /usr/local/bin (first in PATH) with setuid
+    local_dump = "/usr/local/bin/dumpcap"
+    run(["install", "-o", "root", "-g", "wireshark", "-m", "0750", dumpcap, local_dump], check=False)
+    run(["chmod", "u+s", local_dump], check=False)
+    # Verify the one we will use
+    use_path = shutil.which("dumpcap") or local_dump
+    caps2 = getcap(use_path)
+    suid2 = is_setuid(use_path)
+    print(f"🛠 Using dumpcap at: {use_path}")
+    print(f"    caps: {caps2 or 'none'}")
+    print(f"    suid: {suid2}")
+
+def preseed_wireshark_and_install():
+    """Preseed dumpcap setuid, install wireshark, tshark, caps; add group & users."""
+    print("🧪 Preseeding Wireshark (allow non-root capture) and installing non-interactively...")
+    run_shell("echo 'wireshark-common wireshark-common/install-setuid boolean true' | debconf-set-selections")
+    apt_install(["wireshark", "wireshark-common", "tshark", "libcap2-bin"])
+    ensure_group("wireshark")
+    target_user = os.environ.get("SUDO_USER") or os.environ.get("USER") or ""
+    add_users_to_group("wireshark", [target_user, "user", "parrot"])
+    ensure_dumpcap_nonroot()
+
+# -----------------------------
 # Steghide installers
 # -----------------------------
 def install_steghide_deb():
@@ -112,14 +224,14 @@ def install_steghide_deb():
     run(["wget", "-q", STEGO_DEB_URL, "-O", "/tmp/steghide.deb"])
 
     print("📦 Installing patched Steghide (auto-fix deps if needed)...")
-    rc = run("sudo dpkg -i /tmp/steghide.deb", check=False)
+    rc = run(["dpkg", "-i", "/tmp/steghide.deb"], check=False)
     if rc != 0:
         run([
-            "sudo", "-E", "apt-get", "-f", "install", "-yq",
+            "apt-get", "-f", "install", "-yq",
             "-o", "Dpkg::Options::=--force-confdef",
             "-o", "Dpkg::Options::=--force-confold",
         ])
-    run("rm -f /tmp/steghide.deb")
+    run(["rm", "-f", "/tmp/steghide.deb"])
 
     # Only pin on Parrot, where the repo downgrade bug exists
     if is_parrot():
@@ -128,9 +240,9 @@ def install_steghide_deb():
 Pin: version 0.6.0*
 Pin-Priority: 1001
 """
-        with open("/tmp/steghide-pin", "w") as f:
-            f.write(pin_contents)
-        run(["sudo", "mv", "/tmp/steghide-pin", "/etc/apt/preferences.d/steghide"])
+        # Use run_shell with tee-like heredoc while respecting sudo
+        run_shell(f"cat > /tmp/steghide-pin <<'EOF'\n{pin_contents}EOF")
+        run(["mv", "/tmp/steghide-pin", "/etc/apt/preferences.d/steghide"])
 
 def install_steghide_auto(mode: str = "auto"):
     """
@@ -157,12 +269,57 @@ def install_steghide_auto(mode: str = "auto"):
     install_steghide_deb()
 
 # -----------------------------
-# Other tools
+# Helpers to mirror live-CD UX
 # -----------------------------
-def install_zsteg():
-    print("💎 Installing Ruby + zsteg (for image forensics)...")
-    apt_install(["ruby", "ruby-dev", "libmagic-dev"])
-    run(["sudo", "gem", "install", "zsteg", "--no-document"])
+def ensure_john_and_helpers_on_path():
+    print("🧰 Ensuring john/*2john helpers are in PATH...")
+    # john symlink
+    for cand in ("/usr/sbin/john", "/usr/bin/john"):
+        if os.path.exists(cand) and os.access(cand, os.X_OK):
+            run(["ln", "-sf", cand, "/usr/local/bin/john"], check=False)
+            break
+    # /usr/sbin/*2john
+    for root in ("/usr/sbin",):
+        if os.path.isdir(root):
+            for name in os.listdir(root):
+                if name.endswith("2john"):
+                    src = os.path.join(root, name)
+                    if os.access(src, os.X_OK):
+                        run(["ln", "-sf", src, f"/usr/local/bin/{name}"], check=False)
+    # /usr/share/john/*2john + *2john.py (wrap if not executable)
+    share = "/usr/share/john"
+    if os.path.isdir(share):
+        for name in os.listdir(share):
+            if name.endswith("2john") or name.endswith("2john.py"):
+                src = os.path.join(share, name)
+                dst = f"/usr/local/bin/{name}"
+                if os.access(src, os.X_OK):
+                    run(["ln", "-sf", src, dst], check=False)
+                else:
+                    wrapper = f"""#!/usr/bin/env bash
+exec python3 "{src}" "$@"
+"""
+                    run_shell(f"cat <<'EOF' | tee {shlex.quote(dst)} >/dev/null\n{wrapper}EOF")
+                    run(["chmod", "+x", dst], check=False)
+
+def install_cyberchef_offline():
+    print("🧁 Installing offline CyberChef + desktop entry...")
+    apt_install(["curl", "xdg-utils", "desktop-file-utils"])
+    CYBER_DIR = "/opt/cyberchef"
+    run(["mkdir", "-p", CYBER_DIR])
+    index = f"{CYBER_DIR}/index.html"
+    if not os.path.exists(index) or os.path.getsize(index) == 0:
+        run(["curl", "-fsSL", "https://gchq.github.io/CyberChef/", "-o", index], check=False)
+    desktop_entry = """[Desktop Entry]
+Type=Application
+Name=CyberChef (Offline)
+Exec=xdg-open file:///opt/cyberchef/index.html
+Icon=utilities-terminal
+Terminal=false
+Categories=Utility;Education;Development;
+"""
+    run_shell(f"cat <<'EOF' | tee /usr/share/applications/cyberchef.desktop >/dev/null\n{desktop_entry}EOF")
+    run_shell("command -v update-desktop-database >/dev/null && update-desktop-database || true", check=False)
 
 def clone_repo():
     if os.path.exists(REPO_DIR):
@@ -186,6 +343,10 @@ def parse_args():
 def main():
     args = parse_args()
 
+    # In live sessions, require root so we never call sudo inside the script.
+    if is_live() and not is_root():
+        sys.exit("This is a live-CD session. Please run as root (e.g., `sudo -E python3 setup_home_version.py`).")
+
     print("\n🚀 Setting up your CCRI STEM Day Take-Home environment...")
     print("=" * 60 + "\n")
 
@@ -204,14 +365,21 @@ def main():
 
         # From challenge requirements
         "binwalk", "fcrackzip", "john", "radare2", "hexedit", "feh", "imagemagick",
+        # parity niceties
+        "eog", "p7zip-full", "ncat",
     ]
     apt_install(apt_packages)
 
     # OS-aware Steghide
     install_steghide_auto(args.steghide_mode)
 
+    # Helpers on PATH, offline CyberChef, Ruby zsteg, Python deps
+    ensure_john_and_helpers_on_path()
+    install_cyberchef_offline()
     install_zsteg()
     pip_install(["flask", "markupsafe"])
+
+    # Clone the take-home repo
     clone_repo()
 
     print("\n🎉 Setup complete!")
@@ -221,6 +389,4 @@ def main():
     print("ℹ️ If tshark non-root capture fails, log out/in once to apply wireshark group membership.")
 
 if __name__ == "__main__":
-    if os.geteuid() != 0:
-        print("⚠️ This script may require sudo for installing system packages.")
     main()
