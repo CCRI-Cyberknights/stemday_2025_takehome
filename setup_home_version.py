@@ -27,7 +27,6 @@ def is_root() -> bool:
     try:
         return os.geteuid() == 0
     except AttributeError:
-        # Non-POSIX fallback
         return False
 
 def is_live() -> bool:
@@ -57,7 +56,7 @@ def sudo_prefix_list():
 def run(cmd, check=True, env=None):
     """Run a command list or string; auto-add sudo for lists when appropriate."""
     if isinstance(cmd, str):
-        # For shell pipelines, prefer run_shell() instead so we can sudo-wrap cleanly.
+        # For shell pipelines, prefer run_shell() so we can sudo-wrap cleanly.
         print(f"💻 Running (shell): {cmd}")
         rc = subprocess.run(cmd, shell=True, env=env or APT_ENV).returncode
     else:
@@ -83,14 +82,93 @@ def run_shell(cmd_str: str, check=True, env=None):
     return rc
 
 # -----------------------------
+# cdrom-safe apt update
+#   Env knobs:
+#     APT_TOUCH_SOURCES=0   -> never modify sources
+#     APT_FIX_CDROM=1       -> proactively disable cdrom before update
+#     APT_CDROM_MODE=delete -> delete lines instead of comment (default comment)
+# -----------------------------
+def _cdrom_entries_present() -> bool:
+    rc = run_shell(
+        r"grep -RHE '^\s*deb\s+cdrom:' /etc/apt/sources.list /etc/apt/sources.list.d/*.list 2>/dev/null",
+        check=False
+    )
+    return rc == 0
+
+def _comment_or_delete_cdrom_entries(mode: str = "comment"):
+    print(f"🔧 Disabling CD-ROM repos ({mode}) with backups…")
+    if mode not in ("comment", "delete"):
+        mode = "comment"
+    sed_cmd = r"""sed -i 's/^\s*deb\s\+cdrom:/# deb cdrom:/g'""" if mode == "comment" \
+              else r"""sed -i '/^\s*deb\s\+cdrom:/d'"""
+    cmd = f"""bash -lc '
+      shopt -s nullglob;
+      for f in /etc/apt/sources.list /etc/apt/sources.list.d/*.list; do
+        [ -f "$f" ] || continue
+        if grep -qE "^\s*deb\\s+cdrom:" "$f"; then
+          [ -f "$f.bak" ] || cp -a "$f" "$f.bak"
+          {sed_cmd} "$f"
+        fi
+      done
+    '"""
+    run_shell(cmd, check=False)
+
+def restore_cdrom_sources():
+    print("↩️ Restoring any *.bak source lists (if present)…")
+    run_shell(
+        r"""bash -lc '
+          shopt -s nullglob;
+          for f in /etc/apt/sources.list /etc/apt/sources.list.d/*.list; do
+            [ -f "$f.bak" ] && cp -a "$f.bak" "$f"
+          done
+        '""",
+        check=False
+    )
+
+def apt_update_safe():
+    """
+    Safe `apt update`:
+      - No source edits in live sessions (unless forced)
+      - Retry after disabling cdrom repos on failure
+    """
+    touch_sources = os.environ.get("APT_TOUCH_SOURCES", "1") != "0"
+    force_fix     = os.environ.get("APT_FIX_CDROM", "0") == "1"
+    mode          = (os.environ.get("APT_CDROM_MODE") or "comment").lower()
+
+    # Do not modify sources in live sessions unless explicitly forced
+    if is_live() and not force_fix:
+        print("🟨 Live session detected: not modifying APT sources.")
+        return run(["apt-get", "update", "-y"], check=True)
+
+    # Proactive fix (opt-in)
+    if force_fix and touch_sources and _cdrom_entries_present():
+        _comment_or_delete_cdrom_entries(mode)
+
+    # First attempt
+    rc = run(["apt-get", "update", "-y"], check=False)
+    if rc == 0:
+        return rc
+
+    # If it failed and cdrom lines exist, try the safe fix and retry
+    if touch_sources and _cdrom_entries_present():
+        print("⚠️  `apt update` failed and cdrom repos were detected; disabling and retrying…")
+        _comment_or_delete_cdrom_entries(mode)
+        rc = run(["apt-get", "update", "-y"], check=False)
+
+    if rc != 0:
+        sys.exit("❌ `apt update` failed. Check network/proxies or other bad sources.")
+    return rc
+
+# -----------------------------
 # apt/pip helpers
 # -----------------------------
 def apt_update():
+    # keep simple update helper if you want it elsewhere
     run(["apt-get", "update", "-y"])
 
 def apt_install(packages):
     print("📦 Installing system dependencies (non-interactive)...")
-    apt_update()
+    apt_update_safe()  # <-- use the cdrom-safe version
     base = [
         "apt-get", "install", "-yq",
         "-o", "Dpkg::Options::=--force-confdef",
@@ -240,7 +318,6 @@ def install_steghide_deb():
 Pin: version 0.6.0*
 Pin-Priority: 1001
 """
-        # Use run_shell with tee-like heredoc while respecting sudo
         run_shell(f"cat > /tmp/steghide-pin <<'EOF'\n{pin_contents}EOF")
         run(["mv", "/tmp/steghide-pin", "/etc/apt/preferences.d/steghide"])
 
