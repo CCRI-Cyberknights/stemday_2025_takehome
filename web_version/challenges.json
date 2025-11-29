@@ -2,109 +2,109 @@
     "01_Stego": {
         "name": "Stego Decode",
         "folder": "01_Stego",
-        "flag": "ABcUfWgeHx8UeXAFfWQ=",
+        "flag": "ABcUfWgZHBkXeX8BfWI=",
         "script": "extract_flag.py"
     },
     "02_Base64": {
         "name": "Base64 Decoder",
         "folder": "02_Base64",
-        "flag": "ABcUfWgEFxUaeX8CcW4=",
+        "flag": "ABcUfWgADBsMeX8HdmU=",
         "script": "solve.py"
     },
     "03_ROT13": {
         "name": "ROT13 Explorer",
         "folder": "03_ROT13",
-        "flag": "ABcUfWgDAQUCeXcMc2U=",
+        "flag": "ABcUfWgcBAgMeXEHcmA=",
         "script": "decode_rot13.py"
     },
     "04_Vigenere": {
         "name": "Vigenère Cipher",
         "folder": "04_Vigenere",
-        "flag": "ABcUfWgYBwIPeXcAdmI=",
+        "flag": "ABcUfWgaHwUOeXMAcG4=",
         "script": "break_vigenere.py"
     },
     "05_ArchivePassword": {
         "name": "Archive Password Cracker",
         "folder": "05_ArchivePassword",
-        "flag": "ABcUfWgMCRYLeXENcWE=",
+        "flag": "ABcUfWgDCQMEeX4McGI=",
         "script": "crack_zip.py"
     },
     "06_Hashcat": {
         "name": "Hashcat Challenge",
         "folder": "06_Hashcat",
-        "flag": "ABcUfWgUFB0AeXQDfWM=",
+        "flag": "ABcUfWgBABgVeXAMfGY=",
         "script": "run_chain_crack.py"
     },
     "07_ExtractBinary": {
         "name": "Extract from Binary",
         "folder": "07_ExtractBinary",
-        "flag": "ABcUfWgUCx4BeXEFdWc=",
+        "flag": "ABcUfWgMDhEIeXIAcGc=",
         "script": "analyze_binary.py"
     },
     "08_FakeAuthLog": {
         "name": "Fake Auth Log",
         "folder": "08_FakeAuthLog",
-        "flag": "ABcUfWgeEggCeXEBcWc=",
+        "flag": "ABcUfWgQEQQQeX4NdGQ=",
         "script": "investigate_authlog.py"
     },
     "09_FixScript": {
         "name": "Fix the Script",
         "folder": "09_FixScript",
-        "flag": "ABcUfWgFBgATeX8GcmM=",
+        "flag": "ABcUfWgFBgATeXEAdmc=",
         "script": "script_runner.py"
     },
     "10_Metadata": {
         "name": "Metadata Explorer",
         "folder": "10_Metadata",
-        "flag": "ABcUfWgZEQcLeX8Ncm8=",
+        "flag": "ABcUfWgRARYUeXUEcWU=",
         "script": "inspect_metadata.py"
     },
     "11_HiddenFlag": {
         "name": "Hidden Flag Hunt",
         "folder": "11_HiddenFlag",
-        "flag": "ABcUfWgSEBUKeXACc2M=",
+        "flag": "ABcUfWgRChgKeXQHd2I=",
         "script": "search_for_flag.py"
     },
     "12_QRCodes": {
         "name": "QR Codes Puzzle",
         "folder": "12_QRCodes",
-        "flag": "ABcUfWgSEBQBeXUBd2I=",
+        "flag": "ABcUfWgMHREReXMNdGA=",
         "script": "qr_code_explorer.py"
     },
     "13_HTTPHeaders": {
         "name": "HTTP Headers Analysis",
         "folder": "13_HTTPHeaders",
-        "flag": "ABcUfWgCAQIAeX4GfGc=",
+        "flag": "ABcUfWgfExMBeXECfW8=",
         "script": "investigate_headers.py"
     },
     "14_SubdomainSweep": {
         "name": "Subdomain Sweep",
         "folder": "14_SubdomainSweep",
-        "flag": "ABcUfWgEFR0aeX8CcGE=",
+        "flag": "ABcUfWgPDB0FeX4NdWU=",
         "script": "explore_subdomains.py"
     },
     "15_ProcessInspection": {
         "name": "Process Inspection",
         "folder": "15_ProcessInspection",
-        "flag": "ABcUfWgDAwEFeXUBcmA=",
+        "flag": "ABcUfWgFDAMXeXEEc2c=",
         "script": "explore_processes.py"
     },
     "16_HexHunting": {
         "name": "Hex Hunting",
         "folder": "16_HexHunting",
-        "flag": "ABcUfWgZEgcWeXcGcmQ=",
+        "flag": "ABcUfWgEBBgBeX8GdGE=",
         "script": "inspect_binary.py"
     },
     "17_NmapScanning": {
         "name": "Nmap Scanning",
         "folder": "17_NmapScanning",
-        "flag": "ABcUfWgFCwYHeXMDcGQ=",
+        "flag": "ABcUfWgEEB8HeXEHfWE=",
         "script": "helper_scan.py"
     },
     "18_PcapSearch": {
         "name": "Pcap Search",
         "folder": "18_PcapSearch",
-        "flag": "ABcUfWgUEhUAeXcGc2c=",
+        "flag": "ABcUfWgAEAsGeXIHdmI=",
         "script": "analyze_pcap.py"
     }
 }

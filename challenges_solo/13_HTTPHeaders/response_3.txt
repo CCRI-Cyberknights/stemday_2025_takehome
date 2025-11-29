@@ -1,13 +1,12 @@
 HTTP/1.1 200 OK
-Date: Sun, 30 Jun 2025 15:54:11 GMT
-Server: Liber8-Server/2.3.1
+Date: Sun, 30 Jun 2025 15:52:36 GMT
+Server: Go HTTP Server/1.19
 Content-Type: text/plain; charset=UTF-8
-Cache-Control: public, max-age=86400
-X-Powered-By: Python/3.11.4
-X-Flag: WSBP-9245-UEJK
+Cache-Control: no-store
+X-Powered-By: ASP.NET Core/7.0
+X-Flag: CCRI-IJOS-7268
 X-Frame-Options: SAMEORIGIN
 X-Content-Type-Options: nosniff
-Set-Cookie: sessionid=3emfedts9e8p; HttpOnly; Secure
 
 <html>
   <head><title>Data Service</title></head>
@@ -17,4 +16,4 @@ Set-Cookie: sessionid=3emfedts9e8p; HttpOnly; Secure
   </body>
 </html>
 
-<!-- To-do: Update security headers on staging -->
+<!-- Debug: Session created for client 10.6.112.3 -->

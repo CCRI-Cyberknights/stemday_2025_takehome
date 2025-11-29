@@ -1,15 +1,15 @@
 HTTP/1.1 200 OK
-Date: Sun, 30 Jun 2025 15:53:09 GMT
-Server: Go HTTP Server/1.19
-Content-Type: text/html; charset=UTF-8
-Cache-Control: public, max-age=86400
-X-Powered-By: PHP/8.1.12
-X-Flag: NPPL-2215-OFEY
+Date: Sun, 30 Jun 2025 15:46:49 GMT
+Server: nginx/1.24.0
+Content-Type: text/plain; charset=UTF-8
+Cache-Control: no-store
+X-Powered-By: Node.js/18.16.0
+X-Flag: AOYN-6954-HNUT
 X-Frame-Options: SAMEORIGIN
 X-Content-Type-Options: nosniff
-Set-Cookie: sessionid=57s7jwu2qp53; HttpOnly; Secure
+Set-Cookie: sessionid=hfjrccxv8z3u; HttpOnly; Secure
 
-Welcome to the Liber8 data endpoint.
+Welcome to the CryptKeepers data endpoint.
 This endpoint returns plain text responses.
 
-<!-- Debug: Session created for client 10.6.112.3 -->
+<!-- Debug: API response size 512 bytes -->
