@@ -17,16 +17,14 @@ Follow the instructions here [VMSETUP.md](https://github.com/CCRI-Cyberknights/s
 In a terminal on **Parrot OS**, run:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py | python3 -
-````
+curl -fsSL [https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py](https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py) | python3 -
+```
 
 This will:
-
 * Install all required tools and dependencies
 * Download and install the patched Steghide version
 * Install `zsteg` for image forensics
 * Clone the **take-home CTF repository** to your Desktop at:
-
   ```
   ~/Desktop/stemday_2025_takehome
   ```
@@ -39,34 +37,28 @@ After setup:
 
 1. Open the folder `~/Desktop/stemday_2025_takehome`
 2. **Move the file `Launch_CCRI_CTF_HUB.desktop` out of the folder and onto your Desktop**
-
    * This is your shortcut to the challenge hub
 3. Double-click **`Launch_CCRI_CTF_HUB.desktop`**
-
-   * If it doesn’t open, right-click → **Properties → Permissions** → enable
-     **“Allow this file to run as a program”**
+   * If it doesn’t open, right-click → **Properties → Permissions** → enable **“Allow this file to run as a program”**
 
 ### Manual launch (alternative)
-
 ```bash
 cd ~/Desktop/stemday_2025_takehome
 python3 start_web_hub.py
 ```
-
 Then open [http://localhost:5000](http://localhost:5000) in your browser.
 
 To stop the hub:
-
 ```bash
 python3 stop_web_hub.py
 ```
 
 ---
 
-## 🧭 Guided vs Solo Modes
+## 🧭 Exploration vs Solo Modes
 
-* **Guided Mode** – Interactive hints and scripts to help solve each challenge
-* **Solo Mode** – Same challenges, minimal hints for independent play
+* **Exploration Mode** – Interactive hints and scripts to help solve each challenge. This is the recommended "Guided" experience for learning.
+* **Solo Mode** – Same challenges and flags, but with minimal hints for independent play.
 
 Switch between modes from the hub’s top navigation.
 
@@ -74,24 +66,21 @@ Switch between modes from the hub’s top navigation.
 
 ## 🧩 How to Play
 
-* Each challenge has a **flag** like:
-
+* Each challenge contains a hidden **flag** following this format:
   ```
-  CTF{example_flag_here}
+  CCRI-AAAA-1111
   ```
-
-* Enter the flag and click **Submit**:
-
-  * ✅ Correct: green checkmark appears
-  * ❌ Incorrect: try again
+* Enter the flag you find into the hub and click **Submit**:
+  * ✅ Correct: A green checkmark appears and the challenge is unlocked.
+  * ❌ Incorrect: The flag is rejected; try a different approach!
 
 ---
 
 ## 🧠 Tips
 
-* Start in **Guided Mode** if you’re new
-* Read the `README.txt` in each challenge folder for clues
-* Try different tools — each challenge teaches something new
+* Start in **Exploration Mode** if you are new to CTFs or Linux.
+* Read the `README.md` in each challenge folder for specific clues and tool suggestions.
+* Experiment with the command line — each challenge is designed to teach a new skill.
 
 ---
 
