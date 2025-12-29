@@ -1,19 +1,15 @@
-🧠 Challenge 09: Fix the Flag! (Bash Edition)
-==============================================
+# 🐛 Broken Script Challenge
 
-You’ve discovered a **broken Bash script** that’s supposed to print the agency’s flag — but something’s gone wrong.  
+You have obtained a Python script (`broken_flag.py`) that generates the flag.
+However, the script was damaged during the download. When you try to run it, it crashes.
 
-Right now it only prints a **two-digit number** at the end instead of a full flag. Your mission is to analyze the buggy code and fix it so the correct flag appears.  
+**Your Mission:** Debug the code.
+1.  Attempt to run the script to see the error message.
+2.  Read the error output—it will tell you exactly where the problem is (look for `SyntaxError`).
+3.  Open the file, fix the broken line, and run it again to reveal the flag.
 
-🛠️ **What you’ll do:**  
-1. Run the interactive helper: `fix_flag.sh`  
-2. Inspect the broken Bash logic.  
-3. Choose the correct operation to repair the calculation.  
-4. Reveal and save the real flag.  
+## 📂 Files in this folder
+* `broken_flag.py` – The python script with a deliberate syntax error.
 
-📂 **Files in this folder:**  
-- `broken_flag.sh` → The buggy Bash script  
-- `fix_flag.sh` → Your guided code-fixing assistant  
-
-🚩 **Flag format:** `CCRI-AAAA-1111`
-
+---
+**🏁 Flag format:** `CCRI-AAAA-1111`

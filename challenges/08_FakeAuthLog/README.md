@@ -1,24 +1,16 @@
-🕵️ Challenge 08: Fake Auth Log Investigation
-==============================================
+# 📜 Log Analysis Challenge
 
-You’ve recovered a suspicious system log: `auth.log`.  
+A server has been compromised. The system administrators have provided the `auth.log` file, which records every login attempt.
 
-It’s packed with fake SSH login records — but buried in the noise is **one hidden flag**.  
+The file contains thousands of lines of noise. Somewhere in there, a hacker successfully logged in or executed a suspicious command.
 
-🔑 The clue? Some entries have **odd-looking process IDs (PIDs)** that don’t follow normal number patterns. Only **one** of these anomalies contains the valid flag.  
+**Your Mission:** Filter the noise.
+1.  Analyze the log file (`auth.log`).
+2.  Use text processing tools (like `grep`) to search for keywords like "Accepted", "root", or the agency flag format.
+3.  Identify the specific log entry that contains the flag.
 
-🛠️ **Tools You’ll Use:**  
-- `grep` – Scan for suspicious entries in system logs.  
+## 📂 Files in this folder
+* `auth.log` – A large server log file containing thousands of entries.
 
-🧠 **Your steps:**  
-1. Run the interactive helper: `investigate_authlog.sh`  
-2. The script will scan `auth.log` and highlight suspicious entries.  
-3. Review the findings and search for patterns or keywords.  
-4. Identify the **real flag** in the format: `CCRI-AAAA-1111`  
-
-📂 **Files in this folder:**  
-- `auth.log` → Fake system log to investigate  
-- `investigate_authlog.sh` → Your guided log analysis assistant  
-
-💡 **Tip:** Not every strange PID hides a flag. Look for the **agency’s exact format** and don’t get distracted by decoys.  
-
+---
+**🏁 Flag format:** `CCRI-AAAA-1111`
