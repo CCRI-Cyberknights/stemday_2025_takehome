@@ -20,6 +20,7 @@
 # 4.1 Whitelist Coach Mode Engine
 !/coach_core.py
 !/worker_node.py
+!/exploration_core.py
 
 # 5. Whitelist Infrastructure Directories
 !/debs/
