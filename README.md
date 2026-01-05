@@ -82,19 +82,20 @@ You will see several Python scripts in the folder. Here is what they do:
 | :--- | :--- |
 | **`start_web_hub.py`** | Starts the web server where you submit flags. |
 | **`reset_environment.py`** | **Fix-It Tool.** Run this to delete all generated files and reset challenges to their original state. Useful if you accidentally delete a flag! |
-| **`coach_core.py`** | The brain behind the interactive "Cyber Coach" hints. |
+| **`coach_core.py`** | The engine powering **Coach Mode** (see below). |
 | **`ccri_ctf.pyz`** | The "Game Cartridge". Contains the validation logic for flags. **Do not delete.** |
 
 ---
 
 ## 🧭 Modes of Play
 
-* **Exploration Mode** (Recommended):
-    Interactive hints and scripts (`.explore.py`) help guide you through the solution. Perfect for learning new tools.
-* **Solo Mode**:
-    The same challenges and flags, but with minimal hints. You must rely on standard Linux tools and your own knowledge.
+* **Exploration Mode** (Recommended for Beginners):
+    In this track, each challenge folder contains two different scripts. You generally run one or the other using the **buttons on the Web Hub**:
+    * **Exploration Mode** (via the helper/solver script) is a high-level demo of what a CTF is. It performs the actual work behind the scenes—running real commands on real files—to show you the result immediately.
+    * **Coach Mode** is an interactive, command-by-command guide that walks you through the steps to solve the puzzle yourself.
 
-Switch between modes using the navigation bar in the web hub.
+* **Solo Mode** (Hard Mode):
+    Inside `challenges_solo/`, you get the same puzzles but **no scripts and no coach**. You must rely entirely on your own Linux knowledge and tools to find the flags.
 
 ---
 
@@ -114,8 +115,8 @@ Switch between modes using the navigation bar in the web hub.
 
 ## 🧠 Tips
 
-* **New to Linux?** Start in **Exploration Mode**.
+* **New to Linux?** Start in **Exploration Mode** and use the **Launch Coach Mode** button!
 * **Stuck?** Read the `README.md` inside each challenge folder for specific clues.
-* **Broken Challenge?** Run `./reset_environment.py` to wipe the slate clean and try again.
+* **Broken Challenge?** Run `./reset_environment.py` to wipe the slate clean of generated files and try again. If you accidentially removed something critical, redownload the challenge from github again.
 
 Have fun and good luck! 🎉
