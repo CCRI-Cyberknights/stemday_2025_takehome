@@ -1,87 +1,121 @@
 # 🎯 CCRI STEM Day CTF – Take-Home Version
 
-Welcome to the **CCRI CyberKnights Capture The Flag Challenge!** 🧠💻  
+Welcome to the **CCRI CyberKnights Capture The Flag Challenge!** 🧠💻
 This is the same environment you experienced during STEM Day, now ready for you to explore at home!
 
 ---
 
 ## 🚀 Quick Setup (Three Steps)
 
-Download **Parrot OS** from here, either *Home* for the look or *Security* for the full suite of tools:  
-👉 https://www.parrotsec.org/download/
+1.  **Get the OS:**
+    Download **Parrot OS** from here (either *Home* or *Security* edition):
+    👉 [https://www.parrotsec.org/download/](https://www.parrotsec.org/download/)
 
-⚠️ Other Linux distros (like Linux Mint) should work, but Parrot OS is the tested environment. The desktop icon may only work in Parrot OS right now.
+    > ⚠️ *Other Linux distros (like Linux Mint) should work, but Parrot OS is the tested environment.*
 
-Follow the instructions here [VMSETUP.md](https://github.com/CCRI-Cyberknights/stemday_2025_takehome/blob/main/VMSETUP.md) to setup the **Parrot OS** iso within **Virtualbox**.
+2.  **Configure the VM:**
+    Follow our setup guide here: [VMSETUP.md](https://github.com/CCRI-Cyberknights/stemday_2025_takehome/blob/main/VMSETUP.md)
 
-In a terminal on **Parrot OS**, run:
+3.  **Install the Challenge:**
+    Open a terminal in your new VM and run this command:
 
-```bash
-curl -fsSL [https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py](https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py) | python3 -
+    ```bash
+    curl -fsSL [https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py](https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py) | python3 -
+    ```
+
+    **This script will:**
+    * Install required tools (Python/Flask dependencies).
+    * Install forensic tools (`steghide`, `zsteg`).
+    * Clone the challenge repository to: `~/Desktop/stemday_2025_takehome`
+
+---
+
+## 🗂️ Project Layout
+
+Once installed, your folder will look like this:
+
+```text
+stemday_2025_takehome/
+├── challenges/                 # Exploration Mode (Guided scripts)
+├── challenges_solo/            # Solo Mode (Hard mode)
+├── web_version/                # The Web Portal source code
+├── coach_core.py               # Coach Mode Engine
+├── exploration_core.py         # Exploration Engine
+├── worker_node.py              # Background Task Manager
+├── start_web_hub.py            # Launcher Script
+├── stop_web_hub.py             # Shutdown Script
+├── reset_environment.py        # 🧹 Cleanup Tool
+├── ccri_ctf.pyz                # 🔒 Core Logic Bundle
+└── Launch_CCRI_CTF_HUB.desktop # Desktop Shortcut
 ```
-
-This will:
-* Install all required tools and dependencies
-* Download and install the patched Steghide version
-* Install `zsteg` for image forensics
-* Clone the **take-home CTF repository** to your Desktop at:
-  ```
-  ~/Desktop/stemday_2025_takehome
-  ```
 
 ---
 
 ## ▶️ Launching the Challenge Hub
 
-After setup:
+1.  Open the folder `~/Desktop/stemday_2025_takehome`.
+2.  **Move the file `Launch_CCRI_CTF_HUB.desktop` out of the folder and onto your Desktop.**
+3.  Double-click the icon to start.
+    * *Note: If it doesn’t open, right-click → **Properties → Permissions** → check **“Allow this file to run as a program”**.*
 
-1. Open the folder `~/Desktop/stemday_2025_takehome`
-2. **Move the file `Launch_CCRI_CTF_HUB.desktop` out of the folder and onto your Desktop**
-   * This is your shortcut to the challenge hub
-3. Double-click **`Launch_CCRI_CTF_HUB.desktop`**
-   * If it doesn’t open, right-click → **Properties → Permissions** → enable **“Allow this file to run as a program”**
+### Manual Launch (Alternative)
+If the shortcut fails, you can run it from the terminal:
 
-### Manual launch (alternative)
 ```bash
 cd ~/Desktop/stemday_2025_takehome
-python3 start_web_hub.py
+./start_web_hub.py
 ```
 Then open [http://localhost:5000](http://localhost:5000) in your browser.
 
 To stop the hub:
 ```bash
-python3 stop_web_hub.py
+./stop_web_hub.py
 ```
 
 ---
 
-## 🧭 Exploration vs Solo Modes
+## 📜 Script Reference
 
-* **Exploration Mode** – Interactive hints and scripts to help solve each challenge. This is the recommended "Guided" experience for learning.
-* **Solo Mode** – Same challenges and flags, but with minimal hints for independent play.
+You will see several Python scripts in the folder. Here is what they do:
 
-Switch between modes from the hub’s top navigation.
+| Script | Purpose |
+| :--- | :--- |
+| **`start_web_hub.py`** | Starts the web server where you submit flags. |
+| **`reset_environment.py`** | **Fix-It Tool.** Run this to delete all generated files and reset challenges to their original state. Useful if you accidentally delete a flag! |
+| **`coach_core.py`** | The brain behind the interactive "Cyber Coach" hints. |
+| **`ccri_ctf.pyz`** | The "Game Cartridge". Contains the validation logic for flags. **Do not delete.** |
+
+---
+
+## 🧭 Modes of Play
+
+* **Exploration Mode** (Recommended):
+    Interactive hints and scripts (`.explore.py`) help guide you through the solution. Perfect for learning new tools.
+* **Solo Mode**:
+    The same challenges and flags, but with minimal hints. You must rely on standard Linux tools and your own knowledge.
+
+Switch between modes using the navigation bar in the web hub.
 
 ---
 
 ## 🧩 How to Play
 
-* Each challenge contains a hidden **flag** following this format:
-  ```
-  CCRI-AAAA-1111
-  ```
-* Enter the flag you find into the hub and click **Submit**:
-  * ✅ Correct: A green checkmark appears and the challenge is unlocked.
-  * ❌ Incorrect: The flag is rejected; try a different approach!
+1.  **Find the Flag:**
+    Each challenge hides a flag text string. It always follows this format:
+    ```text
+    CCRI-AAAA-1111
+    ```
+2.  **Submit:**
+    Enter the flag into the web hub and click **Submit**.
+    * ✅ **Correct:** You get points and the challenge is marked complete.
+    * ❌ **Incorrect:** Check your spelling and try again!
 
 ---
 
 ## 🧠 Tips
 
-* Start in **Exploration Mode** if you are new to CTFs or Linux.
-* Read the `README.md` in each challenge folder for specific clues and tool suggestions.
-* Experiment with the command line — each challenge is designed to teach a new skill.
-
----
+* **New to Linux?** Start in **Exploration Mode**.
+* **Stuck?** Read the `README.md` inside each challenge folder for specific clues.
+* **Broken Challenge?** Run `./reset_environment.py` to wipe the slate clean and try again.
 
 Have fun and good luck! 🎉
