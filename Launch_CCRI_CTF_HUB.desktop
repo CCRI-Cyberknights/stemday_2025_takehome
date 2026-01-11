@@ -2,7 +2,8 @@
 Version=1.0
 Type=Application
 Terminal=true
-Name=Launch_CCRI_CTF_Hub
+Name=Launch CCRI CTF Hub (Take-Home)
 Exec=bash -c 'cd "$HOME/Desktop/stemday_2025_takehome" && python3 start_web_hub.py'
-Icon=firefox
-Name[en_US]=Launch_CCRI_CTF_Hub
+Icon=$HOME/Desktop/stemday_2025_takehome/icon.png
+Name[en_US]=Launch CCRI CTF Hub (Take-Home)
+Comment=Start the CyberKnights Challenge Hub
