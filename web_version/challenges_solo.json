@@ -2,91 +2,91 @@
     "01_Stego": {
         "name": "Stego Decode",
         "folder": "01_Stego",
-        "flag": "ABcUfWgfDgAUeXUAdGE="
+        "flag": "ABcUfWgbCgEBeXEGd28="
     },
     "02_Base64": {
         "name": "Base64 Decoder",
         "folder": "02_Base64",
-        "flag": "ABcUfWgaHBEKeXEAcG4="
+        "flag": "ABcUfWgcHQAGeXQBcmM="
     },
     "03_ROT13": {
         "name": "ROT13 Explorer",
         "folder": "03_ROT13",
-        "flag": "ABcUfWgBAxYNeXcHdmY="
+        "flag": "ABcUfWgZEgMTeXcEcW4="
     },
     "04_Vigenere": {
         "name": "Vigenère Cipher",
         "folder": "04_Vigenere",
-        "flag": "ABcUfWgaCxMJeXcMcmQ="
+        "flag": "ABcUfWgRAggNeXUAcWI="
     },
     "05_ArchivePassword": {
         "name": "Archive Password Cracker",
         "folder": "05_ArchivePassword",
-        "flag": "ABcUfWgCFRwUeXENdWU="
+        "flag": "ABcUfWgcAB0HeXIHdGY="
     },
     "06_Hashcat": {
         "name": "Hashcat Challenge",
         "folder": "06_Hashcat",
-        "flag": "ABcUfWgVCwUSeXAEdGI="
+        "flag": "ABcUfWgbFRwaeXAHd2c="
     },
     "07_ExtractBinary": {
         "name": "Extract from Binary",
         "folder": "07_ExtractBinary",
-        "flag": "ABcUfWgDCAEFeXEEcGU="
+        "flag": "ABcUfWgTDwIHeXMAdGI="
     },
     "08_FakeAuthLog": {
         "name": "Fake Auth Log",
         "folder": "08_FakeAuthLog",
-        "flag": "ABcUfWgPABEXeXIFdG8="
+        "flag": "ABcUfWgGEgMMeXIHdW8="
     },
     "09_FixScript": {
         "name": "Fix the Script",
         "folder": "09_FixScript",
-        "flag": "ABcUfWgFBgATeXQEcmY="
+        "flag": "ABcUfWgFBgATeXAAdWQ="
     },
     "10_Metadata": {
         "name": "Metadata Explorer",
         "folder": "10_Metadata",
-        "flag": "ABcUfWgdExAVeX8HcmI="
+        "flag": "ABcUfWgOCRwaeXQDd28="
     },
     "11_HiddenFlag": {
         "name": "Hidden Flag Hunt",
         "folder": "11_HiddenFlag",
-        "flag": "ABcUfWgRDQgbeXQMcWA="
+        "flag": "ABcUfWgQCxkQeXACc24="
     },
     "12_QRCodes": {
         "name": "QR Codes Puzzle",
         "folder": "12_QRCodes",
-        "flag": "ABcUfWgFExUBeXYFcWM="
+        "flag": "ABcUfWgfCxcMeX4BdGU="
     },
     "13_HTTPHeaders": {
         "name": "HTTP Headers Analysis",
         "folder": "13_HTTPHeaders",
-        "flag": "ABcUfWgREQIOeXAAcWA="
+        "flag": "ABcUfWgBHwYXeXcMd2E="
     },
     "14_InternalPortals": {
         "name": "Internal Portals",
         "folder": "14_InternalPortals",
-        "flag": "ABcUfWgZERUJeXMCcWc="
+        "flag": "ABcUfWgfHx4GeXcMcm4="
     },
     "15_ProcessInspection": {
         "name": "Process Inspection",
         "folder": "15_ProcessInspection",
-        "flag": "ABcUfWgHEBAAeX8NdWA="
+        "flag": "ABcUfWgCERcZeXYNfWA="
     },
     "16_HexHunting": {
         "name": "Hex Hunting",
         "folder": "16_HexHunting",
-        "flag": "ABcUfWgGHx4ZeXMHfG4="
+        "flag": "ABcUfWgbERkBeX4GfWI="
     },
     "17_NmapScanning": {
         "name": "Nmap Scanning",
         "folder": "17_NmapScanning",
-        "flag": "ABcUfWgZChYFeXEFfWM="
+        "flag": "ABcUfWgaAwEBeXEHdmU="
     },
     "18_PcapSearch": {
         "name": "Pcap Search",
         "folder": "18_PcapSearch",
-        "flag": "ABcUfWgXHwQHeX4HfWE="
+        "flag": "ABcUfWgTDwsNeXYDd2Y="
     }
 }

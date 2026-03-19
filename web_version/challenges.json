@@ -2,126 +2,126 @@
     "01_Stego": {
         "name": "Stego Decode",
         "folder": "01_Stego",
-        "flag": "ABcUfWgUDQMTeXIAfGE=",
+        "flag": "ABcUfWgeHB4AeXMMcmI=",
         "script": ".explore.py",
         "has_coach": true
     },
     "02_Base64": {
         "name": "Base64 Decoder",
         "folder": "02_Base64",
-        "flag": "ABcUfWgEFxoVeXIHdmM=",
+        "flag": "ABcUfWgBFhwWeX4DcmU=",
         "script": ".explore.py",
         "has_coach": true
     },
     "03_ROT13": {
         "name": "ROT13 Explorer",
         "folder": "03_ROT13",
-        "flag": "ABcUfWgMAR0GeXACd2Y=",
+        "flag": "ABcUfWgQDx4WeX8Nc2I=",
         "script": ".explore.py",
         "has_coach": true
     },
     "04_Vigenere": {
         "name": "Vigenère Cipher",
         "folder": "04_Vigenere",
-        "flag": "ABcUfWgAEAcMeX8Gc2I=",
+        "flag": "ABcUfWgYExEFeXYCcWI=",
         "script": ".explore.py",
         "has_coach": true
     },
     "05_ArchivePassword": {
         "name": "Archive Password Cracker",
         "folder": "05_ArchivePassword",
-        "flag": "ABcUfWgDFgoOeX4FdmM=",
+        "flag": "ABcUfWgYDQcTeXMMfGE=",
         "script": ".explore.py",
         "has_coach": true
     },
     "06_Hashcat": {
         "name": "Hashcat Challenge",
         "folder": "06_Hashcat",
-        "flag": "ABcUfWgODRkReXQCdWQ=",
+        "flag": "ABcUfWgBDRgHeXIEfGQ=",
         "script": ".explore.py",
         "has_coach": true
     },
     "07_ExtractBinary": {
         "name": "Extract from Binary",
         "folder": "07_ExtractBinary",
-        "flag": "ABcUfWgHBBoJeXAMdWQ=",
+        "flag": "ABcUfWgCEhYXeX8CcmE=",
         "script": ".explore.py",
         "has_coach": true
     },
     "08_FakeAuthLog": {
         "name": "Fake Auth Log",
         "folder": "08_FakeAuthLog",
-        "flag": "ABcUfWgRHxMGeXUHfGY=",
+        "flag": "ABcUfWgADAAJeX4GdGY=",
         "script": ".explore.py",
         "has_coach": true
     },
     "09_FixScript": {
         "name": "Fix the Script",
         "folder": "09_FixScript",
-        "flag": "ABcUfWgFBgATeXMDcG8=",
+        "flag": "ABcUfWgFBgATeXIAdGY=",
         "script": ".explore.py",
         "has_coach": true
     },
     "10_Metadata": {
         "name": "Metadata Explorer",
         "folder": "10_Metadata",
-        "flag": "ABcUfWgFAhQEeX4HcmE=",
+        "flag": "ABcUfWgMFRAKeXYDcWA=",
         "script": ".explore.py",
         "has_coach": true
     },
     "11_HiddenFlag": {
         "name": "Hidden Flag Hunt",
         "folder": "11_HiddenFlag",
-        "flag": "ABcUfWgeCQgIeXQHfWE=",
+        "flag": "ABcUfWgRDhkReXIEfG8=",
         "script": ".explore.py",
         "has_coach": true
     },
     "12_QRCodes": {
         "name": "QR Codes Puzzle",
         "folder": "12_QRCodes",
-        "flag": "ABcUfWgYHREBeXAHdGI=",
+        "flag": "ABcUfWgDDRQGeXcFcmQ=",
         "script": ".explore.py",
         "has_coach": true
     },
     "13_HTTPHeaders": {
         "name": "HTTP Headers Analysis",
         "folder": "13_HTTPHeaders",
-        "flag": "ABcUfWgEFwsEeXQEc2M=",
+        "flag": "ABcUfWgZHBkCeXYGdGE=",
         "script": ".explore.py",
         "has_coach": true
     },
     "14_InternalPortals": {
         "name": "Internal Portals",
         "folder": "14_InternalPortals",
-        "flag": "ABcUfWgbCRMaeXQCcWE=",
+        "flag": "ABcUfWgEHR0CeX8AfGc=",
         "script": ".explore.py",
         "has_coach": true
     },
     "15_ProcessInspection": {
         "name": "Process Inspection",
         "folder": "15_ProcessInspection",
-        "flag": "ABcUfWgQCBsKeXUBcmQ=",
+        "flag": "ABcUfWgcBBsBeXcNfWI=",
         "script": ".explore.py",
         "has_coach": true
     },
     "16_HexHunting": {
         "name": "Hex Hunting",
         "folder": "16_HexHunting",
-        "flag": "ABcUfWgOABoJeXYMd2I=",
+        "flag": "ABcUfWgfHRoaeX4MdGI=",
         "script": ".explore.py",
         "has_coach": true
     },
     "17_NmapScanning": {
         "name": "Nmap Scanning",
         "folder": "17_NmapScanning",
-        "flag": "ABcUfWgeFQUEeXQAcmc=",
+        "flag": "ABcUfWgDEhkXeXcNdWM=",
         "script": ".explore.py",
         "has_coach": true
     },
     "18_PcapSearch": {
         "name": "Pcap Search",
         "folder": "18_PcapSearch",
-        "flag": "ABcUfWgbCxcXeXYAdmQ=",
+        "flag": "ABcUfWgOHAsJeXEFc2Q=",
         "script": ".explore.py",
         "has_coach": true
     }
