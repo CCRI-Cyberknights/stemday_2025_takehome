@@ -20,7 +20,7 @@ This is the same environment you experienced during STEM Day, now ready for you 
     Open a terminal in your new VM and run this command:
 
     ```bash
-    curl -fsSL [https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py](https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py) | python3 -
+    curl -fsSL 'https://raw.githubusercontent.com/CCRI-Cyberknights/stemday_2025_takehome/main/setup_home_version.py' | python3 -
     ```
 
     **This script will:**
